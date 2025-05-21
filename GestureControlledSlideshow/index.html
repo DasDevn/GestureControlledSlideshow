@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture-Controlled Slideshow</title>
+    <style>
+        img {
+            max-width: 100%;
+            height: auto;
+            display: none;
+        }
+        img.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <img src="1.jpg" class="active" id="slide1">
+    <img src="2.jpg" id="slide2">
+    <img src="3.jpg" id="slide3">
+    <img src="4.jpg" id="slide4">
+    <img src="5.jpg" id="slide5">
+
+    <script>
+        let currentSlide = 1;
+
+        function changeSlide(direction) {
+            document.getElementById(`slide${currentSlide}`).classList.remove('active');
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 5;
+            if (currentSlide > 5) currentSlide = 1;
+            document.getElementById(`slide${currentSlide}`).classList.add('active');
+        }
+
+        // Listen for keyboard events
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight') {
+                changeSlide(1);
+            } else if (event.key === 'ArrowLeft') {
+                changeSlide(-1);
+            }
+        });
+    </script>
+</body>
+</html>
